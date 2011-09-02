@@ -31,9 +31,9 @@ function gigpress_tours() {
 	<div class="wrap gigpress gp-tours">
 
 	<?php screen_icon('gigpress'); ?>		
-	<h2><?php _e("Tours", "gigpress"); ?></h2>
+	<h2><?php _e("Series", "gigpress"); ?></h2>
 	
-	<p><?php _e("A tour is simply a named collection of shows that you want to group together.", "gigpress"); ?></p>
+	<p><?php _e("A series is simply a named collection of events that you want to group together.", "gigpress"); ?></p>
 	
 	<?php
 	if(isset($_GET['gpaction']) && $_GET['gpaction'] == "edit" || is_array($result) && $result['editing'] == TRUE) {
@@ -46,9 +46,9 @@ function gigpress_tours() {
 		
 		if($tour_name) {
 			
-			$submit = '<span class="submit"><input type="submit" name="Submit" class="button-primary" value="' .  __("Update tour", "gigpress") . '" /></span> ' . __("or", "gigpress") . ' <a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=gigpress-tours' . $url_args . '">' . __("cancel", "gigpress") . '</a>'; ?>
+			$submit = '<span class="submit"><input type="submit" name="Submit" class="button-primary" value="' .  __("Update series", "gigpress") . '" /></span> ' . __("or", "gigpress") . ' <a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=gigpress-tours' . $url_args . '">' . __("cancel", "gigpress") . '</a>'; ?>
 			
-			<h3><?php _e("Edit this tour", "gigpress"); ?></h3>
+			<h3><?php _e("Edit this series", "gigpress"); ?></h3>
 		
 			<form method="post" action="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=gigpress-tours<?php echo $url_args; ?>">
 				<input type="hidden" name="tour_id" value="<?php echo $tour_id; ?>" />			
@@ -57,9 +57,9 @@ function gigpress_tours() {
 		<?php
 		} else {
 		?>
-			<div id="message" class="error fade"><p><?php _e("Sorry, but we had trouble loading that tour for editing.", "gigpress"); ?></p></div>	
+			<div id="message" class="error fade"><p><?php _e("Sorry, but we had trouble loading that series for editing.", "gigpress"); ?></p></div>	
 
-			<h3><?php _e("Add a tour", "gigpress"); ?></h3>
+			<h3><?php _e("Add a series", "gigpress"); ?></h3>
 			
 		<?php
 		}
@@ -67,9 +67,9 @@ function gigpress_tours() {
 	} else {
 		
 		$tour_name = '';
-		$submit = '<span class="submit"><input type="submit" name="Submit" class="button-primary" value="' .  __("Add tour", "gigpress") . '" /></span>'; ?>
+		$submit = '<span class="submit"><input type="submit" name="Submit" class="button-primary" value="' .  __("Add series", "gigpress") . '" /></span>'; ?>
 			
-		<h3><?php _e("Add a tour", "gigpress"); ?></h3>
+		<h3><?php _e("Add a series", "gigpress"); ?></h3>
 
 		<form method="post" action="<?php bloginfo('wpurl'); ?>/wp-admin/admin.php?page=gigpress-tours<?php echo $url_args; ?>">
 			<input type="hidden" name="gpaction" value="add" />
@@ -79,17 +79,17 @@ function gigpress_tours() {
 
 			<table class="form-table gp-table">
 				<tr>
-					<th scope="row"><label for="tour_name"><?php _e("Tour name", "gigpress"); ?>:</label></th>
+					<th scope="row"><label for="tour_name"><?php _e("Series name", "gigpress"); ?>:</label></th>
 					<td><input name="tour_name" id="tour_name" type="text" size="48" value="<?php echo $tour_name; ?>" /> &nbsp; <?php echo $submit; ?></td>
 				</tr>
 			</table>		
 		</form>
 
-		<h3><?php _e("All tours", "gigpress"); ?></h3>
+		<h3><?php _e("All Series", "gigpress"); ?></h3>
 
 	<div class="tablenav">
 		<div class="alignleft">
-			<p><?php _e("Note that deleting a tour will <strong>NOT</strong> delete the shows associated with that tour.", "gigpress"); ?></p>
+			<p><?php _e("Note that deleting a series will <strong>NOT</strong> delete the events associated with that series.", "gigpress"); ?></p>
 		</div>
 		<?php // Get all tours from the DB
 			$tours = fetch_gigpress_tours();
@@ -109,8 +109,8 @@ function gigpress_tours() {
 		<thead>
 			<tr>
 				<th scope="col" class="gp-tiny">ID</th>
-				<th scope="col"><?php _e("Tour name", "gigpress"); ?></th>
-				<th scope="col" class="gp-centre"><?php _e("Number of shows", "gigpress"); ?></th>
+				<th scope="col"><?php _e("Series name", "gigpress"); ?></th>
+				<th scope="col" class="gp-centre"><?php _e("Number of events", "gigpress"); ?></th>
 				<th class="gp-centre" scope="col"><?php _e("Actions", "gigpress"); ?></th>
 			</tr>
 		</thead>
@@ -140,14 +140,14 @@ function gigpress_tours() {
 			}
 		
 		} else { ?>
-			<tr><td colspan="4"><strong><?php _e("No tours in the database", "gigpress"); ?></strong></td></tr>
+			<tr><td colspan="4"><strong><?php _e("No event series in the database", "gigpress"); ?></strong></td></tr>
 <?php } ?>
 		</tbody>
 		<tfoot>
 			<tr>
 				<th scope="col" class="gp-tiny">ID</th>
-				<th scope="col"><?php _e("Tour name", "gigpress"); ?></th>
-				<th scope="col" class="gp-centre"><?php _e("Number of shows", "gigpress"); ?></th>
+				<th scope="col"><?php _e("Series name", "gigpress"); ?></th>
+				<th scope="col" class="gp-centre"><?php _e("Number of events", "gigpress"); ?></th>
 				<th class="gp-centre" scope="col"><?php _e("Actions", "gigpress"); ?></th>
 			</tr>
 		</tfoot>

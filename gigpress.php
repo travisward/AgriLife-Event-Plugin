@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: GigPress
+Plugin Name: AgriLife Events
 Plugin URI: http://gigpress.com
-Description: GigPress is a live performance listing and management plugin built for musicians and performers.
+Description: Fork of Gigpress with many features stripped out
 Version: 2.1.14
 Author: Derek Hogue
 Author URI: http://amphibian.info
@@ -62,28 +62,28 @@ function gigpress_admin_menu() {
 	
 	global $gpo;
 	
-	$add = __("Add a show", "gigpress");
-	$shows = __("Shows", "gigpress");
-	$artists = __("Artists", "gigpress");
+	$add = __("Add an event", "gigpress");
+	$shows = __("Events", "gigpress");
+	$artists = __("Event names", "gigpress");
 	$venues = __("Venues", "gigpress");
-	$tours = __("Tours", "gigpress");
+	$tours = __("Series", "gigpress");
 	$settings = __("Settings", "gigpress");
 	$export = __("Import/Export", "gigpress");
 	
-	add_menu_page("GigPress &rsaquo; $add", "GigPress", $gpo['user_level'], __FILE__, "gigpress_add", WP_PLUGIN_URL . "/gigpress/images/gigpress-icon-16.png");
+	add_menu_page("Events &rsaquo; $add", "Events", $gpo['user_level'], __FILE__, "gigpress_add", WP_PLUGIN_URL . "/AgriLife-Event-Plugin/images/gigpress-icon-16.png");
 	// By setting the unique identifier of the submenu page to be __FILE__,
 	// we let it be the first page to load when the top-level menu item is clicked
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $add", $add, $gpo['user_level'], __FILE__, "gigpress_add");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $shows", $shows, $gpo['user_level'], "gigpress-shows", "gigpress_admin_shows");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $artists", $artists, $gpo['user_level'], "gigpress-artists", "gigpress_artists");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $venues", $venues, $gpo['user_level'], "gigpress-venues", "gigpress_venues");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $tours", $tours, $gpo['user_level'], "gigpress-tours", "gigpress_tours");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $settings", $settings, 'manage_options', "gigpress-settings", "gigpress_settings");
-	add_submenu_page(__FILE__, "GigPress &rsaquo; $export", $export, $gpo['user_level'], "gigpress-import-export", "gigpress_import_export");
+	add_submenu_page(__FILE__, "Events &rsaquo; $add", $add, $gpo['user_level'], __FILE__, "gigpress_add");
+	add_submenu_page(__FILE__, "Events &rsaquo; $shows", $shows, $gpo['user_level'], "gigpress-shows", "gigpress_admin_shows");
+	add_submenu_page(__FILE__, "Events &rsaquo; $artists", $artists, $gpo['user_level'], "gigpress-artists", "gigpress_artists");
+	add_submenu_page(__FILE__, "Events &rsaquo; $venues", $venues, $gpo['user_level'], "gigpress-venues", "gigpress_venues");
+	add_submenu_page(__FILE__, "Events &rsaquo; $tours", $tours, $gpo['user_level'], "gigpress-tours", "gigpress_tours");
+	add_submenu_page(__FILE__, "Events &rsaquo; $settings", $settings, 'manage_options', "gigpress-settings", "gigpress_settings");
+	add_submenu_page(__FILE__, "Events &rsaquo; $export", $export, $gpo['user_level'], "gigpress-import-export", "gigpress_import_export");
 	
 	if(GIGPRESS_DEBUG) {
 		require('admin/debug.php');
-		add_submenu_page(__FILE__, "GigPress &rsaquo; Debug", 'Debug', 'manage_options', "gigpress-debug", "gigpress_debug");
+		add_submenu_page(__FILE__, "Events &rsaquo; Debug", 'Debug', 'manage_options', "gigpress-debug", "gigpress_debug");
 	}	
 
 }
@@ -92,8 +92,8 @@ function gigpress_admin_menu() {
 function gigpress_admin_head()	{
 	wp_enqueue_script('jquery');
 	wp_enqueue_script('jquery-ui-sortable');
-	wp_enqueue_script('gigpress-admin-js', WP_PLUGIN_URL . '/gigpress/scripts/gigpress-admin.js', 'jquery');
-	wp_enqueue_style('gigpress-admin-css', WP_PLUGIN_URL . '/gigpress/css/gigpress-admin.css');
+	wp_enqueue_script('gigpress-admin-js', WP_PLUGIN_URL . '/AgriLife-Event-Plugin/scripts/gigpress-admin.js', 'jquery');
+	wp_enqueue_style('gigpress-admin-css', WP_PLUGIN_URL . '/AgriLife-Event-Plugin/css/gigpress-admin.css');
 }
 
 
@@ -109,7 +109,7 @@ function gigpress_js() {
 		wp_enqueue_script('jquery');
 	}
 	if ( $gpo['disable_js'] != 1) {
-		wp_enqueue_script('gigpress-js', WP_PLUGIN_URL . '/gigpress/scripts/gigpress.js', 'jquery');
+		wp_enqueue_script('gigpress-js', WP_PLUGIN_URL . '/AgriLife-Event-Plugin/scripts/gigpress.js', 'jquery');
 	}
 }
 
@@ -120,7 +120,7 @@ function gigpress_head() {
 	
 	if($gpo['disable_css'] != 1) {
 		// Default stylesheet
-		echo('<link type="text/css" rel="stylesheet" href="' . WP_PLUGIN_URL . '/gigpress/css/gigpress.css" media="all" />
+		echo('<link type="text/css" rel="stylesheet" href="' . WP_PLUGIN_URL . '/AgriLife-Event-Plugin/css/gigpress.css" media="all" />
 ');
 	}
 	
@@ -158,7 +158,7 @@ function gigpress_template($path) {
 	} elseif(file_exists(WP_CONTENT_DIR . '/gigpress-templates/' . $path . '.php')) {
 		$load = WP_CONTENT_DIR . '/gigpress-templates/' . $path . '.php';
 	} else {
-		$load = WP_PLUGIN_DIR . '/gigpress/templates/'  . $path . '.php';
+		$load = WP_PLUGIN_DIR . '/AgriLife-Event-Plugin/templates/'  . $path . '.php';
 	}
 	return $load;
 }
@@ -406,7 +406,7 @@ function gigpress_db_out($value) {
 
 
 function gigpress_intl() {
-	load_plugin_textdomain('gigpress', NULL, '/gigpress/langs/');
+	load_plugin_textdomain('gigpress', NULL, '/AgriLife-Event-Plugin/langs/');
 }
 
 
@@ -418,7 +418,7 @@ function register_gigpress_settings() {
 function gigpress_favorites($actions) {
 	global $gpo;
 	$level = "level_" . $gpo['user_level']; 
-	$actions['admin.php?page=gigpress/gigpress.php'] = array('Add a show', $level);
+	$actions['admin.php?page=AgriLife-Event-Plugin/gigpress.php'] = array('Add an event', $level);
     return $actions;
 }
 
@@ -434,7 +434,7 @@ function custom_menu_order($menu_order) {
 	$menu[] = array('', 'read', 'separator-gp', '', 'wp-menu-separator');
 	
 	// Remove the current instance of GigPress
-	$current_position = array_search('gigpress/gigpress.php', $menu_order);
+	$current_position = array_search('AgriLife-Event-Plugin/gigpress.php', $menu_order);
 	unset($menu_order[$current_position]);
 	
 	// Create a new array to hold the menu order
@@ -447,7 +447,7 @@ function custom_menu_order($menu_order) {
 		if($menu_item == 'edit-comments.php')
 		{
 			$new_menu_order[] = 'separator-gp';
-			$new_menu_order[] = 'gigpress/gigpress.php';		
+			$new_menu_order[] = 'AgriLife-Event-Plugin/gigpress.php';		
 		}
 	}
 
@@ -485,7 +485,7 @@ function gigpress_export() {
 
 	check_admin_referer('gigpress-action');
 	global $wpdb;
-	require_once(WP_PLUGIN_DIR . '/gigpress/lib/parsecsv.lib.php');
+	require_once(WP_PLUGIN_DIR . '/AgriLife-Event-Plugin/lib/parsecsv.lib.php');
 
 	$further_where = '';
 	switch($_POST['scope']) {
@@ -601,6 +601,12 @@ add_shortcode('gigpress_menu','gigpress_menu');
 add_shortcode('gigpress_upcoming','gigpress_upcoming');
 add_shortcode('gigpress_archive','gigpress_archive');
 add_shortcode('gigpress_related_shows','gigpress_show_related');
+
+add_shortcode('events_list','gigpress_shows');
+add_shortcode('events_menu','gigpress_menu');
+add_shortcode('events_upcoming','gigpress_upcoming');
+add_shortcode('events_archive','gigpress_archive');
+add_shortcode('events_related','gigpress_show_related');
 
 // We're forced to bed, but we're free to dream.
 

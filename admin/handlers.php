@@ -702,11 +702,11 @@ function gigpress_undo($type) {
 		
 		if($undo != FALSE) { ?>
 			<div id="message" class="updated fade">
-				<p><?php _e("Show(s) successfully restored.", "gigpress"); ?></p>
+				<p><?php _e("Event(s) successfully restored.", "gigpress"); ?></p>
 			</div>
 		<?php } elseif($undo === FALSE) { ?>
 			<div id="message" class="error fade">
-				<p><?php _e("We ran into some trouble restoring your show(s). Sorry.", "gigpress"); ?></p>
+				<p><?php _e("We ran into some trouble restoring your event(s). Sorry.", "gigpress"); ?></p>
 			</div>				
 		<?php }
 	}

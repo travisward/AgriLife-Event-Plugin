@@ -57,7 +57,7 @@ msgstr "Editar este concierto"
 #@ gigpress
 #: admin/new.php:189
 #: gigpress.php:69
-msgid "Add a show"
+msgid "Add an event"
 msgstr "Añadir un concierto"
 
 #@ gigpress

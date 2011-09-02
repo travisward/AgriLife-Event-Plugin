@@ -105,7 +105,7 @@ function gigpress_admin_shows() {
 	<div class="wrap gigpress">
 
 		<?php screen_icon('gigpress'); ?>		
-		<h2><?php _e("Shows", "gigpress"); ?></h2>
+		<h2><?php _e("Events", "gigpress"); ?></h2>
 		
 		<ul class="subsubsub">
 		<?php
@@ -133,7 +133,7 @@ function gigpress_admin_shows() {
 						<input type="hidden" name="scope" value="<?php echo $_GET['scope']; ?>" />
 						<?php endif; ?>
 						<select name="artist_id">
-							<option value="-1"><?php _e("View all artists", "gigpress"); ?></option>
+							<option value="-1"><?php _e("View all events", "gigpress"); ?></option>
 						<?php $artistdata = fetch_gigpress_artists();
 						if($artistdata) {
 							foreach($artistdata as $artist) {
@@ -147,7 +147,7 @@ function gigpress_admin_shows() {
 						</select>
 						
 						<select name="tour_id">
-							<option value="-1"><?php _e("View all tours", "gigpress"); ?></option>
+							<option value="-1"><?php _e("View all series", "gigpress"); ?></option>
 						<?php $tourdata = fetch_gigpress_tours();
 						if($tourdata) {
 							foreach($tourdata as $tour) {
@@ -236,7 +236,7 @@ function gigpress_admin_shows() {
 					<td><?php echo $showdata['country']; ?></td>
 					<td><?php echo $showdata['tour']; ?></td>
 					<td class="gp-centre">
-						<a href="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=gigpress/gigpress.php&amp;gpaction=edit&amp;show_id=<?php echo $show->show_id; ?>" class="edit" title="<?php _e("Edit", "gigpress"); ?>"><?php _e("Edit", "gigpress"); ?></a>&nbsp;|&nbsp;<a href="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=gigpress/gigpress.php&amp;gpaction=copy&amp;show_id=<?php echo $show->show_id; ?>" class="edit" title="<?php _e("Copy", "gigpress"); ?>"><?php _e("Copy", "gigpress"); ?></a>
+						<a href="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=AgriLife-Event-Plugin/gigpress.php&amp;gpaction=edit&amp;show_id=<?php echo $show->show_id; ?>" class="edit" title="<?php _e("Edit", "gigpress"); ?>"><?php _e("Edit", "gigpress"); ?></a>&nbsp;|&nbsp;<a href="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=AgriLife-Event-Plugin/gigpress.php&amp;gpaction=copy&amp;show_id=<?php echo $show->show_id; ?>" class="edit" title="<?php _e("Copy", "gigpress"); ?>"><?php _e("Copy", "gigpress"); ?></a>
 					</td>
 				</tr>
 				<tr class="<?php echo 'alternate' . ' gigpress-' . $showdata['status']; ?>">
@@ -255,13 +255,13 @@ function gigpress_admin_shows() {
 			<?php } // end foreach			
 		} else { // No results from the query
 		?>
-			<tr><td colspan="8"><?php _e("Sorry, no shows to display based on your criteria.", "gigpress"); ?></td></tr>
+			<tr><td colspan="8"><?php _e("Sorry, no events to display based on your criteria.", "gigpress"); ?></td></tr>
 		<?php } ?>
 			</tbody>
 		</table>
 		<div class="tablenav">
 			<div class="alignleft">
-				<input type="submit" value="<?php _e('Trash selected shows', 'gigpress'); ?>" class="button-secondary" /> &nbsp; 
+				<input type="submit" value="<?php _e('Trash selected events', 'gigpress'); ?>" class="button-secondary" /> &nbsp; 
 				<?php
 				if($tour_count = $wpdb->get_var("SELECT count(*) FROM ". GIGPRESS_TOURS ." WHERE tour_status = 'deleted'")) {
 					$tours = $tour_count;
@@ -275,7 +275,7 @@ function gigpress_admin_shows() {
 					$shows = 0;
 				}
 				if($tour_count || $show_count) {					
-					echo('<small>'. __("You have", "gigpress"). ' <strong>'. $shows .' '. __("shows", "gigpress"). '</strong> '. __("and", "gigpress"). ' <strong>'. $tours .' '. __("tours", "gigpress") .'</strong> '. __("in your trash", "gigpress").'.');
+					echo('<small>'. __("You have", "gigpress"). ' <strong>'. $shows .' '. __("events", "gigpress"). '</strong> '. __("and", "gigpress"). ' <strong>'. $tours .' '. __("tours", "gigpress") .'</strong> '. __("in your trash", "gigpress").'.');
 					if($shows != 0 || $tours != 0) {
 						echo(' <a href="'. wp_nonce_url(get_bloginfo('wpurl').'/wp-admin/admin.php?page=gigpress-shows&amp;gpaction=trash' . $url_args, 'gigpress-action') .'">'. __("Take out the trash now", "gigpress") .'</a>.');
 					}

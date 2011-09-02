@@ -5,8 +5,8 @@ class Gigpress_widget extends WP_Widget
 
 	function Gigpress_widget()
 	{
-		$widget_opts = array('description' => __("List upcoming GigPress shows", "gigpress") );
-		$this->WP_Widget('gigpress', 'GigPress', $widget_opts);
+		$widget_opts = array('description' => __("List upcoming events", "gigpress") );
+		$this->WP_Widget('gigpress', 'AgriLife Events', $widget_opts);
 	}
 	
 	function widget($args, $instance)
@@ -57,7 +57,7 @@ class Gigpress_widget extends WP_Widget
 		global $wpdb;
 		
 		$defaults = array(
-			'title' => 'Upcoming shows', 
+			'title' => 'Upcoming events', 
 			'limit' => 5,
 			'scope' => 'upcoming',
 			'show_tours' => 'no',
@@ -84,26 +84,27 @@ class Gigpress_widget extends WP_Widget
 		<p>
 			<select style="width:100%;" id="<?php echo $this->get_field_id('scope'); ?>" name="<?php echo $this->get_field_name('scope'); ?>">	
 				<option value="upcoming"<?php if($scope == 'upcoming') echo ' selected="selected"'; ?>> 
-					<?php _e('Display upcoming shows', 'gigpress'); ?>
+					<?php _e('Display upcoming events', 'gigpress'); ?>
 				</option>
 				<option value="today"<?php if($scope == 'today') echo ' selected="selected"'; ?>> 
-					<?php _e("Display today's shows", 'gigpress'); ?>
+					<?php _e("Display today's events", 'gigpress'); ?>
 				</option>
 				<option value="past"<?php if($scope == 'past') echo ' selected="selected"'; ?>> 
-					<?php _e("Display past shows", 'gigpress'); ?>
+					<?php _e("Display past events", 'gigpress'); ?>
 				</option>
 			</select>
 		</p>		
 
 		<p>
-			<label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('Number of shows to list', 'gigpress'); ?>: 
+			<label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('Number of events to list', 'gigpress'); ?>: 
 				<input style="width: 25px; text-align: center;" id="<?php echo $this->get_field_id('limit'); ?>" name="<?php echo $this->get_field_name('limit'); ?>" type="text" value="<?php echo $limit; ?>" />
 			</label>
 		</p>
 
+		<!--
 		<p>
 			<label for="<?php echo $this->get_field_id('artist'); ?>">
-				<?php _e('Only display shows from this artist', 'gigpress'); ?>
+				<?php _e('Only display events with this name', 'gigpress'); ?>
 			</label>
 			<select style="width:100%;" id="<?php echo $this->get_field_id('artist'); ?>" name="<?php echo $this->get_field_name('artist'); ?>">
 		  		<option value="">--</option>
@@ -115,10 +116,11 @@ class Gigpress_widget extends WP_Widget
 			<?php endforeach; endif; ?>
 			</select>
 		</p>
+		-->
 
 		<p>
 			<label for="<?php echo $this->get_field_id('tour'); ?>">
-				<?php _e('Only display shows from this tour', 'gigpress'); ?>
+				<?php _e('Only display events from this series', 'gigpress'); ?>
 			</label>
 			<select style="width:100%;" id="<?php echo $this->get_field_id('tour'); ?>" name="<?php echo $this->get_field_name('tour'); ?>">
 		  		<option value="">--</option>
@@ -133,7 +135,7 @@ class Gigpress_widget extends WP_Widget
 		
 		<p>
 			<label for="<?php echo $this->get_field_id('venue'); ?>">
-				<?php _e('Only display shows from this venue', 'gigpress'); ?>
+				<?php _e('Only display events from this venue', 'gigpress'); ?>
 			</label>
 			<select style="width:100%;" id="<?php echo $this->get_field_id('venue'); ?>" name="<?php echo $this->get_field_name('venue'); ?>">
 		  		<option value="">--</option>
@@ -145,7 +147,7 @@ class Gigpress_widget extends WP_Widget
 			<?php endforeach; endif; ?>
 			</select>
 		</p>			
-			
+		<!--	
 		<p>
 			<label>
 				<input id="<?php echo $this->get_field_id('group_artists'); ?>" name="<?php echo $this->get_field_name('group_artists'); ?>" type="checkbox" value="yes"<?php if($group_artists == 'yes') echo ' checked="checked"'; ?> /> 
@@ -153,23 +155,24 @@ class Gigpress_widget extends WP_Widget
 				<small><?php _e('Ignored when filtering by artist, tour, or venue.', 'gigpress'); ?></small>
 			</label>
 		</p>
-		
+		-->
+		<!--
 		<p>
 			<select style="width:100%;" id="<?php echo $this->get_field_id('artist_order'); ?>" name="<?php echo $this->get_field_name('artist_order'); ?>">
 				<option value="alphabetical"<?php if($artist_order == 'alphabetical') echo ' selected="selected"'; ?>>
-					<?php _e("Order artists alphabetically", "gigpress"); ?>
+					<?php _e("Order events alphabetically", "gigpress"); ?>
 				</option>
 				<option value="custom"<?php if($artist_order == 'custom') echo ' selected="selected"'; ?>>
-					<?php _e("Order artists by custom order", "gigpress"); ?>
+					<?php _e("Order events by custom order", "gigpress"); ?>
 				</option>
 			</select><br />
-			<small><?php _e('Ignored when not grouping by artist.', 'gigpress'); ?></small>
+			<small><?php _e('Ignored when not grouping by event name.', 'gigpress'); ?></small>
 		</p>
-
+-->
 		<p>
 			<label>
 				<input id="<?php echo $this->get_field_id('show_tours'); ?>" name="<?php echo $this->get_field_name('show_tours'); ?>" type="checkbox" value="yes"<?php if($show_tours == 'yes') echo ' checked="checked"'; ?> /> 
-				<?php _e('Group by tour', 'gigpress'); ?>
+				<?php _e('Group by series', 'gigpress'); ?>
 			</label>
 		</p>
 
@@ -183,7 +186,7 @@ class Gigpress_widget extends WP_Widget
 		<p>
 			<label for="<?php echo $this->get_field_id('link_text'); ?>"><?php _e('Link text'); ?>: 
 				<input class="widefat" id="<?php echo $this->get_field_id('link_text'); ?>" name="<?php echo $this->get_field_name('link_text'); ?>" type="text" value="<?php echo $link_text; ?>" /><br />
-				<small><?php _e('This phrase is used to link to the page specified in your GigPress settings. (Leave blank to disable this link.)', 'gigpress'); ?></small>
+				<small><?php _e('This phrase is used to link to the page specified in your AgriLife Events settings. (Leave blank to disable this link.)', 'gigpress'); ?></small>
 			</label>
 		</p>
 <?php }

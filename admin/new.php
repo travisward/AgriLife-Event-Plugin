@@ -29,8 +29,9 @@ function gigpress_add() {
 	
 		<div id="message" class="updated">
 			<p>
-				<?php _e("<strong>Welcome to GigPress!</strong> Get started by adding your first show below. To display your shows, simply add the", "gigpress"); ?> [gigpress_shows] <?php _e("shortcode to any page or post.", "gigpress"); ?>
-				<?php _e("Questions?  Please check out the", "gigpress"); ?> <a href="http://gigpress.com/docs"><?php _e("documentation", "gigpress"); ?></a> <?php _e("and", "gigpress"); ?> <a href="http://gigpress.com/faq"><?php _e("FAQ", "gigpress"); ?></a> <?php _e("on the GigPress website. Enjoy!", "gigpress"); ?> <small>(<a href="<?php bloginfo('wpurl'); ?>/wp-admin/admin.php?page=gigpress/gigpress.php&amp;gpaction=killwelcome"><?php _e("Don't show this again", "gigpress"); ?>.</a>)</small>
+				<?php _e("<strong>Welcome to AgriLife Events!</strong> Get started by adding your first event below. To display your events, simply add the", "gigpress"); ?> [events_list] <?php _e("shortcode to any page or post.", "gigpress"); ?>
+				
+				<small>(<a href="<?php bloginfo('wpurl'); ?>/wp-admin/admin.php?page=AgriLife-Event-Plugin/gigpress.php&amp;gpaction=killwelcome"><?php _e("Don't show this again", "gigpress"); ?>.</a>)</small>
 			</p>
 		</div>
 		
@@ -182,18 +183,18 @@ function gigpress_add() {
 		
 			<h2><?php _e("Edit this show", "gigpress"); ?></h2>
 		
-			<form method="post" action="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=gigpress/gigpress.php">
+			<form method="post" action="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=AgriLife-Event-Plugin/gigpress.php">
 				<?php wp_nonce_field('gigpress-action') ?>
 				<input type="hidden" name="gpaction" value="update" />
 				<input type="hidden" name="show_id" value="<?php echo $show_id; ?>" />
 		
 		<?php } else { // We're adding a new show ?>
 		
-			<h2><?php _e("Add a show", "gigpress"); ?></h2>
+			<h2><?php _e("Add an Event", "gigpress"); ?></h2>
 			
 			<?php if($load_error) echo $load_error; ?>
 					
-			<form method="post" action="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=gigpress/gigpress.php">
+			<form method="post" action="<?php bloginfo('wpurl') ?>/wp-admin/admin.php?page=AgriLife-Event-Plugin/gigpress.php">
 				<?php wp_nonce_field('gigpress-action') ?>
 				<input type="hidden" name="gpaction" value="add" />
 				<input type="hidden" name="show_status" value="active" />
@@ -348,10 +349,10 @@ function gigpress_add() {
 						</td>
 					</tr>
 				<tr>
-					<th scope="row"><label for="show_artist_id"><?php _e("Artist", "gigpress") ?>:<span class="gp-required">*</span></label></th>
+					<th scope="row"><label for="show_artist_id"><?php _e("Event Name", "gigpress") ?>:<span class="gp-required">*</span></label></th>
 					<td>
 					<select name="show_artist_id" id="show_artist_id" class="can-add-new">
-						<option value="new"<?php if($show_artist_id == 'new') echo(' selected="selected"'); ?>><?php _e("Add a new artist", "gigpress"); ?></option>
+						<option value="new"<?php if($show_artist_id == 'new') echo(' selected="selected"'); ?>><?php _e("Add a new event name", "gigpress"); ?></option>
 						<option value="">------------------</option>
 					  	<?php $artists = fetch_gigpress_artists();
 							if($artists != FALSE) {
@@ -362,7 +363,7 @@ function gigpress_add() {
 									echo(">$artist_name</option>\n\t\t\t");
 								}
 							} else {
-								echo('<option value="0" selected="selected">' . __("No artists in the database", "gigpress") . '</option>');
+								echo('<option value="0" selected="selected">' . __("No Event Names in the database", "gigpress") . '</option>');
 							}
 						?>
 					  </select>
@@ -372,7 +373,7 @@ function gigpress_add() {
 				 
 				<tbody id="show_artist_id_new" class="gigpress-addition<?php if($show_artist_id != 'new') echo(' gigpress-inactive'); ?>">
 				<tr>
-					<th scope="row"><label for="artist_name"><?php _e("Artist name", "gigpress"); ?>:</label></th>
+					<th scope="row"><label for="artist_name"><?php _e("Event name", "gigpress"); ?>:</label></th>
 					<td><input type="text" size="48" name="artist_name" id="artist_name" value="<?php echo $new_artist_name; ?>"<?php if($result['artist_name']) echo(' class="gigpress-error"'); ?> /></td>
 				</tr>
 				</tbody>
@@ -454,6 +455,7 @@ function gigpress_add() {
 					</td>
 				</tr>
 				<?php } ?>			
+				  <!--
 				  <tr>
 					<th scope="row"><label for="show_ages"><?php _e("Admittance", "gigpress") ?>:</label></th>
 					<td><select name="show_ages" id="show_ages">
@@ -470,6 +472,7 @@ function gigpress_add() {
 					  </select>
 					</td>
 				  </tr>
+				  -->
 				  <tr>
 					<th scope="row"><label for="show_price"><?php _e("Price", "gigpress") ?>:</label></th>
 					<td><input type="text" size="10" name="show_price" id="show_price" value="<?php echo $show_price; ?>" /> <span class="description">(<?php _e("include currency symbol", "gigpress"); ?>)</span></td>
@@ -483,19 +486,19 @@ function gigpress_add() {
 					<td><input type="text" size="48" name="show_tix_phone" id="show_tix_phone" value="<?php echo $show_tix_phone; ?>" /></td>
 				  </tr>
 				  <tr>
-					<th scope="row"><label for="show_notes"><?php _e("Notes", "gigpress") ?>:</label></th>
+					<th scope="row"><label for="show_notes"><?php _e("Description", "gigpress") ?>:</label></th>
 					<td>
 						<textarea name="show_notes" id="show_notes" cols="45" rows="5"><?php echo $show_notes; ?></textarea><br />
-						<span class="description"><?php _e("Use this space to list other bands, 'presented by' info, etc", "gigpress"); ?></span>
+						<span class="description"><?php _e("Use this space to describe the event, agenda or links to other resources, etc", "gigpress"); ?></span>
 					</td>
 				  </tr>
 				  <tr>
-					<th scope="row"><label for="show_tour_id"><?php _e("Part of a tour?", "gigpress"); ?></label></th>
+					<th scope="row"><label for="show_tour_id"><?php _e("Part of a series?", "gigpress"); ?></label></th>
 					<td>
 						<select name="show_tour_id" id="show_tour_id" class="can-add-new">
 						<option value="0"><?php _e("No", "gigpress"); ?></option>
 						<option value="0">------------------</option>
-						<option value="new"<?php if($show_tour_id == 'new') echo(' selected="selected"'); ?>><?php _e("Add a new tour", "gigpress"); ?></option>
+						<option value="new"<?php if($show_tour_id == 'new') echo(' selected="selected"'); ?>><?php _e("Add a new series", "gigpress"); ?></option>
 						<option value="0">------------------</option>
 					  	<?php $tours = fetch_gigpress_tours();
 							if($tours != FALSE) {
@@ -506,7 +509,7 @@ function gigpress_add() {
 									echo(">$tour_name</option>\n\t\t\t");
 								}
 							} else {
-								echo("<option value=\"\">".__("No tours in the database", "gigpress")."</option>/n/t/t/t");
+								echo("<option value=\"\">".__("No series in the database", "gigpress")."</option>/n/t/t/t");
 							}
 						?>
 					  </select>
@@ -516,7 +519,7 @@ function gigpress_add() {
 			
 			<tbody id="show_tour_id_new" class="gigpress-addition<?php if($show_tour_id != 'new') echo(' gigpress-inactive'); ?>">
 				<tr>
-					<th scope="row"><label for="tour_name"><?php _e("Tour name", "gigpress"); ?>:</label></th>
+					<th scope="row"><label for="tour_name"><?php _e("Series name", "gigpress"); ?>:</label></th>
 					<td><input type="text" size="48" name="tour_name" id="tour_name" value="<?php echo $new_tour_name; ?>"<?php if($result['tour_name']) echo(' class="gigpress-error"'); ?> /></td>
 				</tr>
 			</tbody>	  
@@ -570,7 +573,7 @@ function gigpress_add() {
 				
 				<?php } else { ?>
 				
-					<span class="submit"><input type="submit" name="Submit" class="button-primary" value="<?php _e("Add show", "gigpress") ?>" /></span>
+					<span class="submit"><input type="submit" name="Submit" class="button-primary" value="<?php _e("Add event", "gigpress") ?>" /></span>
 				
 				<?php } ?>
 				</td>

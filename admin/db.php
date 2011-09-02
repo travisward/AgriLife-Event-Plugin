@@ -73,9 +73,9 @@ global $default_settings;
 $default_settings = array(
 	'age_restrictions' => 'All Ages | All Ages/Licensed | No Minors',
 	'alternate_clock' => 0,
-	'artist_label' => 'Artist',		
+	'artist_label' => 'Event',		
 	'autocreate_post' => 0,
-	'category_exclude' => 0,
+	'category_exclude' => 1,
 	'country_view' => 'long',
 	'date_format_long' => 'l, F jS Y',
 	'date_format' => 'm/d/y',
@@ -83,17 +83,17 @@ $default_settings = array(
 	'default_country' => 'US',
 	'default_date' => GIGPRESS_NOW,
 	'default_time' => '00:00:01',
-	'default_title' => '%artist% in %city% on %date%',
+	'default_title' => '%artist% on %date%',
 	'default_tour' => '',
-	'disable_css' => 0,
-	'disable_js' => 0,
+	'disable_css' => 1,
+	'disable_js' => 1,
 	'display_subscriptions' => 1,
-	'display_country' => 1,
-	'load_jquery' => 1,
-	'nopast' => 'No shows in the archive yet.',
-	'noupcoming' => 'No shows booked at the moment.',
+	'display_country' => 0,
+	'load_jquery' => 0,
+	'nopast' => 'No events in the archive yet.',
+	'noupcoming' => 'No events booked at the moment.',
 	'related_category' => 1,
-	'related_heading' => 'Related show',
+	'related_heading' => 'Related events',
 	'related_position' => 'after',
 	'related' => 'Related post.',
 	'related_date' => 'now',
@@ -102,14 +102,14 @@ $default_settings = array(
 	'relatedlink_notes' => 1,			
 	'rss_head' => 1,
 	'rss_list' => 1,
-	'rss_title' => 'Upcoming shows',
+	'rss_title' => 'Upcoming events',
 	'shows_page' => '',
 	'sidebar_link' => 0,
 	'target_blank' => 0,
 	'time_format' => 'g:ia',
-	'tour_label' => 'Tour',
+	'tour_label' => 'Series',
 	'user_level' => 'edit_posts',
-	'welcome' => 'yes'
+	'welcome' => 'no'
 );
 
 
@@ -245,7 +245,7 @@ function gigpress_db_upgrade_140() {
 	}
 	
 	$gpo['age_restrictions'] = 'All Ages | All Ages/Licensed | No Minors';
-	$gpo['artist_label'] = 'Artist';				
+	$gpo['artist_label'] = 'Event';				
 	$gpo['country_view'] = 'short';
 	$gpo['default_title'] = '%artist% at %venue% on %date%';
 	$gpo['display_subscriptions'] = 1;
