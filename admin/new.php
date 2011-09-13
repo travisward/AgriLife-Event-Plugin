@@ -481,6 +481,22 @@ function gigpress_add() {
 					<th scope="row"><label for="show_tix_url"><?php _e("Ticket URL", "gigpress") ?>:</label></th>
 					<td><input type="text" size="48" name="show_tix_url" id="show_tix_url" value="<?php echo $show_tix_url; ?>" /></td>
 				  </tr>
+				  <tr>
+					<th scope="row"><label for="show_ages">Ticket URL Button Label:</label><br /><em>Default: "Buy Tickets"</em></th>
+					<td><select name="show_ages" id="show_ages">
+					  <option value="Buy Tickets"<?php if($show_ages == "Buy Tickets") echo(' selected="selected"'); ?>>Buy Tickets</option>
+					  <?php
+					  	$ages = explode('|', $gpo['age_restrictions']);
+					  	foreach($ages as $age) {
+					  		$age = trim($age);
+					  		$selected = ($show_ages == $age) ? ' selected="selected"' : '';
+					  		echo('<option value="' . $age . '"' . $selected . '>' . $age . '</option>
+					  		');
+					  	}	
+					  ?>
+					  </select>
+					</td>
+				  </tr>
 	 				<tr>
 					<th scope="row"><label for="show_tix_phone"><?php _e("Ticket phone", "gigpress") ?>:</label></th>
 					<td><input type="text" size="48" name="show_tix_phone" id="show_tix_phone" value="<?php echo $show_tix_phone; ?>" /></td>
@@ -569,7 +585,7 @@ function gigpress_add() {
 					<td>&nbsp;</td>
 					<td>
 				<?php if(isset($_GET['gpaction']) && $_GET['gpaction'] == "edit" || $result['editing'] == TRUE) { ?>
-					<span class="submit"><input type="submit" name="Submit" class="button-primary" value="<?php _e("Update show", "gigpress") ?>" /></span> <?php _e("or", "gigpress"); ?> <a href="<?php bloginfo('wpurl'); ?>/wp-admin/admin.php?page=gigpress-shows"><?php _e("cancel", "gigpress"); ?></a>
+					<span class="submit"><input type="submit" name="Submit" class="button-primary" value="<?php _e("Update event", "gigpress") ?>" /></span> <?php _e("or", "gigpress"); ?> <a href="<?php bloginfo('wpurl'); ?>/wp-admin/admin.php?page=gigpress-shows"><?php _e("cancel", "gigpress"); ?></a>
 				
 				<?php } else { ?>
 				

@@ -48,13 +48,13 @@ function gigpress_settings() {
 			</td>
 		</tr>
 		
-		<tr>
+		<!--<tr>
 			<th scope="row"><?php _e("Short date format", "gigpress") ?>:</th>
 			<td>
-				<input type="text" name="gigpress_settings[date_format]" value="<?php echo $gpo['date_format']; ?>" />
+				<input type="text" name="gigpress_settings[date_format]" value="M d" />
 				<span><?php _e("Output", "gigpress") ?>: <strong><?php echo mysql2date($gpo['date_format'], current_time('mysql')); ?></strong></span>
 			</td>
-		</tr>
+		</tr>-->
 		<tr>
 			<th scope="row"><?php _e("Long date format", "gigpress") ?>:</th>
 			<td>
@@ -78,19 +78,19 @@ function gigpress_settings() {
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><?php _e("Series label", "gigpress") ?>:</th>
+			<th scope="row"><?php _e("Category label", "gigpress") ?>:</th>
 			<td>
 				<input type="text" name="gigpress_settings[tour_label]" size="48" value="<?php echo $gpo['tour_label']; ?>" />
 			</td>
 		</tr>				
-		<!--
+
 		<tr>
-			<th scope="row"><?php _e("Age restrictions", "gigpress") ?>:</th>
+			<th scope="row"><?php _e("Buy Ticket Button Labels", "gigpress") ?>:</th>
 			<td>
-				<input type="text" name="gigpress_settings[age_restrictions]" size="48" value="<?php echo $gpo['age_restrictions']; ?>" /> <span class="description"><?php _e("A pipe-separated list of available age restrictions.", "gigpress"); ?></span>
+				<input type="text" name="gigpress_settings[age_restrictions]" size="48" value="<?php echo $gpo['age_restrictions']; ?>" /> <span class="description"><?php _e("A pipe-separated list of available button labels.", "gigpress"); ?></span>
 			</td>
 		</tr>		
-		-->
+		
 		<tr>
 			<th scope="row"><?php _e("Related posts", "gigpress") ?></th>
 			<td>

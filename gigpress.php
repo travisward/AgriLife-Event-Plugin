@@ -66,7 +66,7 @@ function gigpress_admin_menu() {
 	$shows = __("Events", "gigpress");
 	$artists = __("Event names", "gigpress");
 	$venues = __("Venues", "gigpress");
-	$tours = __("Series", "gigpress");
+	$tours = __("Categories", "gigpress");
 	$settings = __("Settings", "gigpress");
 	$export = __("Import/Export", "gigpress");
 	
@@ -219,7 +219,9 @@ function gigpress_prepare($show, $scope = 'public') {
 	// Shield these fields when we're calling this function from the venues admin screen
 	if($scope != 'venue') {
 		$timeparts = explode(':', $show->show_time);
-		$showdata['admittance'] = (!empty($show->show_ages) && $show->show_ages != 'Not sure') ? wptexturize($show->show_ages) : '';
+		
+		//Admittance re-used as "button label"
+		$showdata['admittance'] = (!empty($show->show_ages) && $show->show_ages != 'Buy Tickets') ? wptexturize($show->show_ages) : '';
 		$showdata['artist'] = wptexturize($show->artist_name);
 		$showdata['artist_id'] = $show->artist_id;
 		$showdata['calendar_summary'] = $show->artist_name . ' ' . __("at", "gigpress") . ' ' . $show->venue_name;
@@ -261,7 +263,7 @@ function gigpress_prepare($show, $scope = 'public') {
 		$showdata['rss_date'] = mysql2date('D, d M Y', $show->show_date, false). " ". $show->show_time." " . gigpress_get_O_offset(get_option('gmt_offset'));
 		$showdata['status'] = $show->show_status;
 		switch($showdata['status']) {
-			case 'active': $showdata['ticket_link'] = ($show->show_tix_url && $show->show_expire >= GIGPRESS_NOW) ? '<a href="' . esc_url($show->show_tix_url)  . '"' . gigpress_target($show->show_tix_url) . ' class="gigpress-tickets-link">' . __("Buy tickets", "gigpress") . '</a>' : '';
+			case 'active': $showdata['ticket_link'] = ($show->show_tix_url && $show->show_expire >= GIGPRESS_NOW) ? '<a href="' . esc_url($show->show_tix_url)  . '"' . gigpress_target($show->show_tix_url) . ' class="gigpress-tickets-link">' . $showdata['admittance']  . '</a>' : '';
 			break;
 			case 'soldout' : $showdata['ticket_link'] = '<strong class="gigpress-soldout">' . __("Sold Out", "gigpress") . '</strong>';
 			break;

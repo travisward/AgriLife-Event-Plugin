@@ -71,14 +71,14 @@ PRIMARY KEY  (tour_id)
 // Default settings
 global $default_settings;
 $default_settings = array(
-	'age_restrictions' => 'All Ages | All Ages/Licensed | No Minors',
+	'age_restrictions' => 'Free Tickets | More Information | More Info | Read More | Sign Up Now',
 	'alternate_clock' => 0,
 	'artist_label' => 'Event',		
 	'autocreate_post' => 0,
 	'category_exclude' => 1,
 	'country_view' => 'long',
 	'date_format_long' => 'l, F jS Y',
-	'date_format' => 'm/d/y',
+	'date_format' => 'M d',
 	'db_version' => GIGPRESS_DB_VERSION,
 	'default_country' => 'US',
 	'default_date' => GIGPRESS_NOW,
