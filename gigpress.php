@@ -221,7 +221,7 @@ function gigpress_prepare($show, $scope = 'public') {
 		$timeparts = explode(':', $show->show_time);
 		
 		//Admittance re-used as "button label"
-		$showdata['admittance'] = (!empty($show->show_ages) && $show->show_ages != 'Buy Tickets') ? wptexturize($show->show_ages) : '';
+		$showdata['admittance'] = (!empty($show->show_ages) && $show->show_ages != 'Buy Tickets') ? wptexturize($show->show_ages) : 'Buy Tickets';
 		$showdata['artist'] = wptexturize($show->artist_name);
 		$showdata['artist_id'] = $show->artist_id;
 		$showdata['calendar_summary'] = $show->artist_name . ' ' . __("at", "gigpress") . ' ' . $show->venue_name;

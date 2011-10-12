@@ -55,6 +55,7 @@ function gigpress_settings() {
 				<span><?php _e("Output", "gigpress") ?>: <strong><?php echo mysql2date($gpo['date_format'], current_time('mysql')); ?></strong></span>
 			</td>
 		</tr>-->
+		<input type="hidden" name="gigpress_settings[date_format]" value="M d" />
 		<tr>
 			<th scope="row"><?php _e("Long date format", "gigpress") ?>:</th>
 			<td>
