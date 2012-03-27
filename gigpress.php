@@ -598,6 +598,8 @@ if($gpo['related_position'] != "nowhere") {
 
 add_action('widgets_init', 'gigpress_load_widgets');
 
+add_shortcode('show_my_events','gigpress_shows');
+
 add_shortcode('gigpress_shows','gigpress_shows');
 add_shortcode('gigpress_menu','gigpress_menu');
 add_shortcode('gigpress_upcoming','gigpress_upcoming');

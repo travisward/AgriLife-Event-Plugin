@@ -25,7 +25,7 @@ function gigpress_shows($filter = null, $content = null) {
 			'limit' => FALSE,
 			'scope' => 'upcoming',
 			'sort' => FALSE,
-			'group_artists' => 'yes',
+			'group_artists' => 'no', /* altered from gigpress default */
 			'artist_order' => 'custom',
 			'show_menu' => FALSE,
 			'show_menu_count' => FALSE,
